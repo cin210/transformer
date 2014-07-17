@@ -4,6 +4,7 @@ import(
     "fmt"
     "io/ioutil"
     "net/http"
+    "net/url"
     "tritium_oss/driver"
 )
 
@@ -14,30 +15,32 @@ type Page struct {
 
 func (p *Page) save() error{
     filename := p.Title + ".txt"
+
     return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
-func loadPage(title string) (*Page, error) {
-    filename := title + ".txt"
-    body, err := ioutil.ReadFile(filename)
-    if err != nil{
-        return nil, err
+func request(path string) (*Page, error){
+    target  := "https://" + path
+    u, _    := url.ParseRequestURI(target)
+    urlStr  := fmt.Sprintf("%v", u)
+    response, err  := http.Get(urlStr)
+    if err != nil {
+        e_msg := fmt.Sprintf("%v", err)
+        return &Page{Title: urlStr, Body: []byte(e_msg)}, nil
+    } else {
+        body, _  := ioutil.ReadAll(response.Body)
+        return &Page{Title: urlStr, Body: body}, nil
     }
-    return &Page{Title: title, Body: body}, nil
 }
 
 func handler(w http.ResponseWriter, r *http.Request){
     tscript, _ := ioutil.ReadFile("main.ts")
-    html, _ := loadPage("tEngine")
-    output := driver.Transform(string(tscript), string(html.Body))
-    // fmt.Fprintf(w, "URL received: %s", r.URL.Path[1:])
+    html, _    := request(r.URL.Path[1:])
+    output     := driver.Transform(string(tscript), string(html.Body))
     fmt.Fprintf(w, "%s", output)
 }
 
 func main(){
-  p1 := &Page{Title: "tEngine", Body: []byte("All t.engines running!")}
-  p1.save()
-  http.HandleFunc("/", handler)
-  http.HandleFunc("/json", jsonHandler)
-  http.ListenAndServe(":3030", nil)
+    http.HandleFunc("/", handler)
+    http.ListenAndServe(":3030", nil)
 }
