@@ -1,0 +1,50 @@
+{
+	"ImportPath": "tengine",
+	"GoVersion": "go1.3",
+	"Deps": [
+		{
+			"ImportPath": "code.google.com/p/goprotobuf/proto",
+			"Comment": "go.r60-130",
+			"Rev": "61664b8425f3e0e4371d4b56016b224b9d69cbbb"
+		},
+		{
+			"ImportPath": "github.com/moovweb/gokogiri/css",
+			"Comment": "5.0.100-1-g7fa0322",
+			"Rev": "7fa032289bfa5a1ab88afd54563766bc100722e5"
+		},
+		{
+			"ImportPath": "github.com/moovweb/gokogiri/help",
+			"Comment": "5.0.100-1-g7fa0322",
+			"Rev": "7fa032289bfa5a1ab88afd54563766bc100722e5"
+		},
+		{
+			"ImportPath": "github.com/moovweb/gokogiri/html",
+			"Comment": "5.0.100-1-g7fa0322",
+			"Rev": "7fa032289bfa5a1ab88afd54563766bc100722e5"
+		},
+		{
+			"ImportPath": "github.com/moovweb/gokogiri/util",
+			"Comment": "5.0.100-1-g7fa0322",
+			"Rev": "7fa032289bfa5a1ab88afd54563766bc100722e5"
+		},
+		{
+			"ImportPath": "github.com/moovweb/gokogiri/xml",
+			"Comment": "5.0.100-1-g7fa0322",
+			"Rev": "7fa032289bfa5a1ab88afd54563766bc100722e5"
+		},
+		{
+			"ImportPath": "github.com/moovweb/gokogiri/xpath",
+			"Comment": "5.0.100-1-g7fa0322",
+			"Rev": "7fa032289bfa5a1ab88afd54563766bc100722e5"
+		},
+		{
+			"ImportPath": "github.com/moovweb/rubex",
+			"Comment": "4.7.15-1-g91948f7",
+			"Rev": "91948f737435fc938f905ce80440a13c8e162f43"
+		},
+		{
+			"ImportPath": "tritium_oss",
+			"Rev": "f78e7c87bf014c70c9ae4a21c44510507af4792f"
+		}
+	]
+}
