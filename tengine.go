@@ -5,7 +5,7 @@ import(
     "io/ioutil"
     "net/http"
     "net/url"
-    "tritium_oss/driver"
+    "tritium_oss/tr"
 )
 
 type Page struct {
@@ -13,14 +13,8 @@ type Page struct {
     Body []byte
 }
 
-func (p *Page) save() error{
-    filename := p.Title + ".txt"
-
-    return ioutil.WriteFile(filename, p.Body, 0600)
-}
-
 func request(path string) (*Page, error){
-    target  := "https://" + path
+    target  := "http://" + path
     u, _    := url.ParseRequestURI(target)
     urlStr  := fmt.Sprintf("%v", u)
     response, err  := http.Get(urlStr)
@@ -36,11 +30,14 @@ func request(path string) (*Page, error){
 func handler(w http.ResponseWriter, r *http.Request){
     tscript, _ := ioutil.ReadFile("main.ts")
     html, _    := request(r.URL.Path[1:])
-    output     := driver.Transform(string(tscript), string(html.Body))
+    output     := tritium.Transform(string(tscript), string(html.Body))
     fmt.Fprintf(w, "%s", output)
 }
 
 func main(){
     http.HandleFunc("/", handler)
-    http.ListenAndServe(":3030", nil)
+    err := http.ListenAndServe(":3030", nil)
+    if err != nil {
+        panic(err)
+    }
 }
