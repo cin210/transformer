@@ -28,9 +28,15 @@ func request(path string) (*Page, error){
 }
 
 func handler(w http.ResponseWriter, r *http.Request){
-    tscript, _ := ioutil.ReadFile("main.ts")
-    html, _    := request(r.URL.Path[1:])
-    output     := tritium.Transform(string(tscript), string(html.Body))
+    output := ""
+    if r.URL.Path[1:] == "" {
+        output     = "t.Engine running. Pass any url through the t.Engine path to transform the domain in real time."
+    } else {
+        tscript, _ := ioutil.ReadFile("main.ts")
+        html, _    := request(r.URL.Path[1:])
+        output     = tritium.Transform(string(tscript), string(html.Body))
+    }
+
     fmt.Fprintf(w, "%s", output)
 }
 
@@ -38,6 +44,6 @@ func main(){
     http.HandleFunc("/", handler)
     err := http.ListenAndServe(":3030", nil)
     if err != nil {
-        panic(err)
+        fmt.Fprintf("I've made a huge mistake...")
     }
 }
