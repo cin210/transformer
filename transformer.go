@@ -9,7 +9,7 @@ import(
     "io/ioutil"
     "net/http"
     "net/url"
-    "tritium_oss/tr"
+    "open-tritium/tr"
 )
 
 type Page struct {
@@ -61,6 +61,6 @@ func main(){
     http.HandleFunc("/", handler)
     err := http.ListenAndServe(":3030", nil)
     if err != nil {
-        fmt.Fprintf("I've made a huge mistake...")
+        fmt.Printf("I've made a huge mistake...")
     }
 }
