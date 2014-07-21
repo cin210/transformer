@@ -10,6 +10,6 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 export OLD_DYLD=$DYLD_LIBRARY_PATH
 export DYLD_LIBRARY_PATH=$GOPATH/clibs/lib
-$DIR/tengine "$@"
+$DIR/transformer "$@"
 
 export DYLD_LIBRARY_PATH=$OLD_DYLD
