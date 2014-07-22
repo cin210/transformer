@@ -1,3 +1,0 @@
-select("test") {
-  log("hi")
-}

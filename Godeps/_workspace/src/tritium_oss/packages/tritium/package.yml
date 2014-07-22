@@ -1,5 +1,0 @@
-name: tritium
-dependencies:
-  - libxml
-  - url
-  - json

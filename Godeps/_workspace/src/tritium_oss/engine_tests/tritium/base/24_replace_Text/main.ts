@@ -1,3 +1,0 @@
-replace("foo") {
-  set("bar")
-}
