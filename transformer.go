@@ -51,7 +51,7 @@ func handler(w http.ResponseWriter, r *http.Request){
         tscript, _ := ioutil.ReadFile("main.ts")
         html, _    := request(r.URL.Path[1:])
 		// Invoke a tritium transformation
-        output     = tritium.Transform(string(tscript), string(html.Body))
+        output     = tritium.Transform(string(tscript), string(html.Body), "")
     }
 
     fmt.Fprintf(w, "%s", output)
